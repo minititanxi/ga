@@ -179,11 +179,13 @@ vencoder_reconfigure(int iid) {
 			if ((*rtspconf->vso)[i].compare("b") == 0) {
 				if (reconf->bitrateKbps > 0)
 					(*rtspconf->vso)[i+1] = std::to_string((long double)reconf->bitrateKbps * 1000);
+				ga_error("333333333333333333333333333\n");
 				continue;
 			}
 			if ((*rtspconf->vso)[i].compare("crf") == 0) {
 				if (reconf->crf > 0)
 					(*rtspconf->vso)[i+1] = std::to_string((long double)reconf->crf);
+				ga_error("4444444444444444444444444\n");
 				continue;
 			}
 		}

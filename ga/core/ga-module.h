@@ -93,8 +93,8 @@ typedef struct ga_ioctl_reconfigure_s {
 	int framerate_d;	/**< Framerate denominator */
 	int bitrateKbps;	/**< bitrate in Kbit-per-second. Affects both bitrate and vbv-maxrate */
 	int bufsize;		/**< vbv-bufsize */
-	int width;		/**< Width */
-	int height;		/**< Height */
+	static const int width = 1920;		/**< Width */
+	static const int height = 1080;		/**< Height */
 }	ga_ioctl_reconfigure_t;
 
 #ifdef __cplusplus
@@ -131,7 +131,6 @@ typedef struct ga_module_s {
 #else
 #define	MODULE_EXPORT	/**< MODULE_EXPORT is not unsed in UNIX-like environment */
 #endif
-
 EXPORT ga_module_t * ga_load_module(const char *modname, const char *prefix);
 EXPORT void ga_unload_module(ga_module_t *m);
 EXPORT int ga_init_single_module(const char *name, ga_module_t *m, void *arg);

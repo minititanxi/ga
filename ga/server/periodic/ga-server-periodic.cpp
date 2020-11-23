@@ -46,7 +46,7 @@ static void *audio_encoder_param = NULL;
 static struct gaRect *prect = NULL;
 static struct gaRect rect;
 
-static ga_module_t *m_vsource, *m_filter, *m_vencoder, *m_asource, *m_aencoder, *m_ctrl, *m_server;
+static ga_module_t *m_vsource, *m_filter, *m_vencoder, *m_asource, *m_aencoder, *m_ctrl, *m_server, *m_adaptive;
 
 int
 load_modules() {
@@ -68,6 +68,8 @@ load_modules() {
 	}
 	if((m_ctrl = ga_load_module("mod/ctrl-sdl", "sdlmsg_replay_")) == NULL)
 		return -1;
+	if((m_adaptive = ga_load_module("mod/adaptive-profile", "adaptive_")) == NULL)
+		return -1;
 	if((m_server = ga_load_module("mod/server-live555", "live_")) == NULL)
 		return -1;
 	return 0;
@@ -86,6 +88,7 @@ init_modules() {
 	ga_init_single_module_or_quit("filter", m_filter, (void*) filter_param);
 	//
 	ga_init_single_module_or_quit("video-encoder", m_vencoder, filterpipefmt);
+	ga_init_single_module_or_quit("adaptive-stream", m_adaptive, m_vencoder);
 	if(ga_conf_readbool("enable-audio", 1) != 0) {
 	//////////////////////////
 #ifndef __APPLE__
@@ -129,6 +132,7 @@ run_modules() {
 	// server
 	if(m_server->start(NULL) < 0)		exit(-1);
 	//
+	if(m_adaptive->start(NULL) < 0)	exit(-1);
 	return 0;
 }
 

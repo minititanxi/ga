@@ -6,23 +6,19 @@ GA_PLATFORM =	x86
 GA_CPUBITS =	32
 GA_WINSYS =	win32
 
-!if ("$(PLATFORM)" == "X64")
-GA_PLATFORM =	x64
-GA_CPUBITS =	64
-GA_WINSYS =	win64
-!endif
+
 
 INCLUDES	= -I..\..\deps.$(GA_WINSYS)\include \
 		  -I..\..\deps.$(GA_WINSYS)\include\SDL2 \
-		  -I..\..\deps.$(GA_WINSYS)\include\live555
+		  -I..\..\deps.$(GA_WINSYS)\include\live555 \
+		  -I..\..\deps.$(GA_WINSYS)\include\fl
 NODEBUG		= 1
 TARGETTOS	= WINNT
 
 !include <ntwin32.mak>
 
-TOOLS32		= $(VSINSTALLDIR)\VC
-#CXX		= "$(TOOLS32)\bin\cl"
-CXX		= cl
+TOOLS32		= C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC
+CXX		= "$(TOOLS32)\bin\cl"
 CXX_FLAGS	= $(INCLUDES) $(cdebug) $(cflags) \
 		  -I. -I"$(TOOLS32)\include" \
 		  /EHsc \
@@ -43,4 +39,5 @@ LIB_SDL		= SDL2.lib SDL2main.lib SDL2_ttf.lib
 LIB_FFMPEG	= swscale.lib swresample.lib postproc.lib \
 		  avdevice.lib avfilter.lib avformat.lib avcodec.lib avutil.lib
 LIB_PTHREAD	= pthreadVC2.lib
+LIB_FL = fuzzylite.lib
 

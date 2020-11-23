@@ -4,6 +4,7 @@ include NMakefile.common
 MAKEFILE=NMakefile
 
 all:
+	cd adaptive-stream && nmake /f $(MAKEFILE) && cd ..
 	cd asource-system && nmake /f $(MAKEFILE) && cd ..
 	cd ctrl-sdl && nmake /f $(MAKEFILE) && cd ..
 	cd encoder-audio && nmake /f $(MAKEFILE) && cd ..
@@ -17,7 +18,8 @@ all:
 	cd vsource-desktop && nmake /f $(MAKEFILE).dfm && cd ..
 
 install:
-	-mkdir ..\..\bin.$(GA_WINSYS)\mod
+	-mkdir ..\..\bin\mod
+	cd adaptive-stream && nmake /f $(MAKEFILE) install && cd ..
 	cd asource-system && nmake /f $(MAKEFILE) install && cd ..
 	cd ctrl-sdl && nmake /f $(MAKEFILE) install && cd ..
 	cd encoder-audio && nmake /f $(MAKEFILE) install && cd ..
@@ -29,6 +31,7 @@ install:
 	cd vsource-desktop && nmake /f $(MAKEFILE) install && cd ..
 
 clean:
+	cd adaptive-stream && nmake /f $(MAKEFILE) clean && cd ..
 	cd asource-system && nmake /f $(MAKEFILE) clean && cd ..
 	cd ctrl-sdl && nmake /f $(MAKEFILE) clean && cd ..
 	cd encoder-audio && nmake /f $(MAKEFILE) clean && cd ..

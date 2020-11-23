@@ -8,6 +8,7 @@
 #include "vsource.h"
 #include "ga-mediasubsession.h"
 #include "ga-liveserver.h"
+#include "../adaptive-stream/adaptive-stream.h"
 
 static UsageEnvironment* env = NULL;
 
@@ -105,6 +106,7 @@ qos_server_report(void *clientData) {
 	struct timeval now;
 	std::map<RTPSink*, std::map<unsigned,qos_server_record_t> >::iterator mi;
 	//
+	//ga_error("11111111111111111111111111111111111111");
 	gettimeofday(&now, NULL);
 	for(mi = sinkmap.begin(); mi != sinkmap.end(); mi++) {
 		RTPTransmissionStatsDB& db = mi->first->transmissionStatsDB();
@@ -163,6 +165,8 @@ qos_server_report(void *clientData) {
 					stats->jitter(),
 					mi->first->rtpTimestampFrequency());
 			//
+			// adaptive reconfig
+			adaptive_reconfigure(100.0*d_pkt_lost/d_pkt_sent, 1000.0 * stats->roundTripDelay() / 65536, stats->jitter());
 			mj->second.pkts_lost = pkts_lost;
 			mj->second.pkts_sent = pkts_sent;
 			mj->second.bytes_sent = bytes_sent;

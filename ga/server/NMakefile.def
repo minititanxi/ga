@@ -3,7 +3,8 @@
 
 INCLUDES	= -I..\..\..\deps.win32\include \
 		  -I..\..\..\deps.win32\include\SDL2 \
-		  -I..\..\..\deps.win32\include\live555
+		  -I..\..\..\deps.win32\include\live555 \
+		  -I..\..\..\deps.win32\include\fl
 NODEBUG		= 1
 TARGETTOS	= WINNT
 
@@ -33,4 +34,5 @@ LIB_SDL		= SDL2.lib SDL2main.lib SDL2_ttf.lib
 LIB_FFMPEG	= swscale.lib swresample.lib postproc.lib \
 		  avdevice.lib avfilter.lib avformat.lib avcodec.lib avutil.lib
 LIB_PTHREAD	= pthreadVC2.lib
+LIB_FL = fuzzylite.lib
 

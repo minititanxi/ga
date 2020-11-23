@@ -84,7 +84,7 @@
 #define	gmtime_r(pt,ptm)	gmtime_s(ptm,pt)	/**< Mapping gmtime_r() to gmtime_s() */
 #endif
 #endif
-// dlopen
+// dlopen LoadLibraryEx(f, NULL, LOAD_WITH_ALTERED_SEARCH_PATH)
 #ifndef dlopen
 #define	dlopen(f,opt)		LoadLibrary(f)		/**< Mapping dlopen() to LoadLibrary() */
 #endif

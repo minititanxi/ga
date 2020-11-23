@@ -20,7 +20,6 @@
  * @file
  * Common functions and definitions for implementing a GamingAnywhere module.
  */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -55,6 +54,8 @@ static map<ga_module_t *, HMODULE> mlist;
  * This function has to return an instance of the \em ga_module_t,
  * which is then returned to the caller of this function.
  */
+
+
 ga_module_t *
 ga_load_module(const char *modname, const char *prefix) {
 	char fn[1024];
@@ -62,6 +63,7 @@ ga_load_module(const char *modname, const char *prefix) {
 	HMODULE handle;
 	ga_module_t * (*do_module_load)();
 #ifdef WIN32
+	ga_error("%s win32\n", modname);
 	snprintf(fn, sizeof(fn), "%s.dll", modname);
 #elif defined __APPLE__
 	snprintf(fn, sizeof(fn), "%s.dylib", modname);
@@ -71,6 +73,7 @@ ga_load_module(const char *modname, const char *prefix) {
 	//
 	if((handle = dlopen(fn, RTLD_NOW|RTLD_LOCAL)) == NULL) {
 		ga_error("ga_load_module: load module (%s) failed - %s.\n", fn, dlerror());
+		ga_error("%d \n",GetLastError());
 		return NULL;
 	}
 	if((do_module_load = (ga_module_t * (*)()) dlsym(handle, "module_load")) == NULL) {

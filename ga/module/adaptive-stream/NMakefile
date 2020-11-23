@@ -1,0 +1,9 @@
+
+!include <..\NMakefile.common>
+
+LIBS	= $(LIBS) $(LIB_FL) $(LIB_LIVE555) $(LIB_FFMPEG)
+OBJS	= adaptive-profile.obj adaptive-stream.obj
+TARGET	= adaptive-stream.$(EXT)
+
+!include <..\NMakefile.build>
+
