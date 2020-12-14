@@ -54,7 +54,7 @@ load_modules() {
 		return -1;
 	if((m_filter = ga_load_module("mod/filter-rgb2yuv", "filter_RGB2YUV_")) == NULL)
 		return -1;
-	if((m_vencoder = ga_load_module("mod/encoder-video", "vencoder_")) == NULL)
+	if((m_vencoder = ga_load_module("mod/encoder-x264", "vencoder_")) == NULL)
 		return -1;
 	if(ga_conf_readbool("enable-audio", 1) != 0) {
 	//////////////////////////

@@ -1,7 +1,7 @@
 
 !include <..\NMakefile.common>
 
-LIBS	= $(LIBS) libx264.lib
+# LIBS	= $(LIBS) libx264.lib
 
 OBJS	= encoder-x264.obj
 TARGET	= encoder-x264.$(EXT)
